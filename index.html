@@ -778,8 +778,9 @@ html.cc #cur,html.cc #spark{display:block}
 .tr:focus-visible{outline:2px solid var(--lime);outline-offset:4px}
 .step.hit .why span:first-child{animation:whyhit 1.4s ease 2}
 @keyframes whyhit{0%,100%{box-shadow:0 0 0 0 rgba(212,255,48,0)}40%{box-shadow:0 0 0 6px rgba(212,255,48,.45)}}
-#backTh{position:fixed;right:32px;bottom:32px;z-index:60;height:52px;padding:0 22px;border:0;background:var(--lime);color:#141414;font:700 16px/1 var(--sans);cursor:pointer;box-shadow:0 10px 30px rgba(0,0,0,.25);transform:translateY(12px);opacity:0;transition:opacity .35s,transform .35s}
-#backTh.show{opacity:1;transform:none}
+#backTh{position:fixed;left:50%;bottom:40px;z-index:60;height:56px;padding:0 28px;border:0;background:var(--lime);color:#141414;font:700 18px/1 var(--sans);cursor:pointer;box-shadow:0 0 0 6px rgba(212,255,48,.18),0 12px 34px rgba(0,0,0,.35);transform:translate(-50%,14px);opacity:0;transition:opacity .35s,transform .35s}
+#backTh.show{opacity:1;transform:translate(-50%,0)}
+#backTh:hover{background:#e6ff8a}
 #backTh[hidden]{display:block;visibility:hidden}
 #backTh.show{visibility:visible}
 </style>

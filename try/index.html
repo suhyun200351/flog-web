@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>F,LOG 체험 · 웹 + 앱</title>
+<link rel="icon" type="image/png" sizes="192x192" href="/Comma-app/icon-192.png?v=2">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+  /* F,LOG 체험 페이지 (11/19): 한 화면에 왼쪽은 웹, 오른쪽은 폰 목업 속 실제 앱 */
+  :root { --lime: #d4ff30; --bg: #151515; --line: #2d2d2b; --gray: #9e9e99; --side: 560px; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; background: var(--bg); color: #f7f7f5; font-family: Pretendard, -apple-system, 'Apple SD Gothic Neo', sans-serif; overflow: hidden; word-break: keep-all; }
+  .wrap { display: grid; grid-template-columns: 1fr var(--side); height: 100vh; }
+  .web { position: relative; border-right: 1px solid var(--line); min-width: 0; }
+  .web iframe { width: 100%; height: 100%; border: 0; display: block; background: #fff; }
+  .side { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; padding: 16px 24px; }
+  .tag { display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; }
+  .tag b { font-size: 13px; letter-spacing: .14em; color: var(--lime); font-weight: 700; }
+  .tag span { font-size: 17px; font-weight: 600; }
+  .phone { position: relative; flex: none; }
+  .phone .scr { position: absolute; left: 6.62%; top: 3.29%; width: 86.76%; height: 93.42%; overflow: hidden; background: #151515; }
+  .phone .scr iframe { position: absolute; left: 0; top: 0; width: 393px; height: 852px; border: 0; transform-origin: 0 0; display: block; }
+  .phone .sb { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+  .phone .body { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; user-select: none; }
+  .ctrl { display: flex; gap: 10px; }
+  .ctrl button { font: inherit; font-size: 14px; font-weight: 600; color: #f7f7f5; background: #232322; border: 1px solid #3a3a38; border-radius: 999px; padding: 9px 16px; cursor: pointer; transition: border-color .2s, color .2s; }
+  .ctrl button:hover { border-color: var(--lime); color: var(--lime); }
+  .hint { font-size: 13px; color: var(--gray); text-align: center; line-height: 1.5; }
+  .mob { display: none; }
+  @media (max-width: 900px) {
+    .wrap { grid-template-columns: 1fr; }
+    .side { display: none; }
+    .web { border: 0; }
+    .mob { display: flex; position: fixed; left: 16px; right: 16px; bottom: 16px; justify-content: center; }
+    .mob a { flex: 1; max-width: 360px; text-align: center; text-decoration: none; font-weight: 700; color: #151515; background: var(--lime); border-radius: 999px; padding: 14px 18px; box-shadow: 0 6px 24px rgba(0,0,0,.35); }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <section class="web" aria-label="F,LOG 웹">
+    <iframe id="web" src="../" title="F,LOG 웹"></iframe>
+  </section>
+  <aside class="side" aria-label="F,LOG 앱 체험">
+    <div class="tag"><b>APP</b><span>F,LOG 앱을 직접 눌러 보세요</span></div>
+    <div class="phone" id="phone">
+      <div class="scr" id="scr">
+        <iframe id="app" src="/Comma-app/?frame" title="F,LOG 앱"></iframe>
+        <img class="sb" src="statusbar.png" alt="">
+      </div>
+      <img class="body" src="iphone.webp" alt="">
+    </div>
+    <div class="ctrl">
+      <button type="button" id="again">↻ 앱 처음부터</button>
+      <button type="button" id="top">↑ 웹 맨 위로</button>
+      <button type="button" id="full">⛶ 전체 화면</button>
+    </div>
+    <p class="hint">왼쪽 웹은 스크롤하며 읽고, 오른쪽 폰은 마우스로 눌러 보세요.</p>
+  </aside>
+</div>
+<div class="mob"><a href="/Comma-app/">F,LOG 앱 체험하기 →</a></div>
+<script>
+(function () {
+  var MW = 906, MH = 1824; // 아이폰 목업 원본 크기 (화면 = 가로 86.76% · 세로 93.42%)
+  var phone = document.getElementById('phone'), scr = document.getElementById('scr'), app = document.getElementById('app'), web = document.getElementById('web');
+  function fit() {
+    var h = Math.min(window.innerHeight - 225, 1000), w = h * MW / MH;
+    var maxW = Math.min(window.innerWidth * 0.36, 560) - 48;
+    if (w > maxW) { w = maxW; h = w * MH / MW; }
+    w = Math.max(220, w); h = w * MH / MW;
+    phone.style.width = w + 'px'; phone.style.height = h + 'px';
+    document.documentElement.style.setProperty('--side', Math.max(380, Math.round(w + 96)) + 'px');
+    var sw = w * 0.8676;
+    scr.style.borderRadius = (sw * 0.135) + 'px';
+    app.style.transform = 'scale(' + (sw / 393) + ')';
+  }
+  window.addEventListener('resize', fit); fit();
+  document.getElementById('again').onclick = function () { app.src = '/Comma-app/?frame&t=' + Date.now(); };
+  document.getElementById('top').onclick = function () {
+    try { web.contentWindow.scrollTo({ top: 0, behavior: 'smooth' }); } catch (e) { web.src = web.src; }
+  };
+  document.getElementById('full').onclick = function () {
+    var d = document;
+    if (d.fullscreenElement) d.exitFullscreen && d.exitFullscreen();
+    else d.documentElement.requestFullscreen && d.documentElement.requestFullscreen();
+  };
+})();
+</script>
+</body>
+</html>

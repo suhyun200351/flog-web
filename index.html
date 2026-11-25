@@ -16,7 +16,8 @@
 <style id="getAppCss">
 /* 맨 끝: 앱 QR + 홈 화면 추가 가이드 영상 (모든 페이지 공통, 11/25) */
 #getApp{background:var(--ink2);border-top:1px solid var(--line);padding:clamp(72px,11vh,130px) 0 clamp(64px,9vh,110px);color:var(--text)}
-#getApp .ga{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(32px,4.5vw,88px);align-items:center}
+#getApp .wrap{width:min(1760px,100%)}
+#getApp .ga{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,9fr);gap:clamp(32px,3.5vw,72px);align-items:center}
 #getApp .ga-tag{display:inline-block;font:700 clamp(13px,.9vw,16px)/1.6 var(--sans);background:var(--lime);color:#141414;padding:2px 12px 3px;letter-spacing:.02em}
 #getApp h2{margin:18px 0 12px;font-size:clamp(30px,3vw,56px);letter-spacing:-.045em;line-height:1.3}
 #getApp h2 em{font-style:normal;color:var(--lime)}
@@ -30,6 +31,9 @@
 #getApp .ga-vid{position:relative;aspect-ratio:16/9;background:#f2f2f0;border:1px solid var(--line);overflow:hidden}
 #getApp .ga-vid video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
 #getApp .ga-cap{margin-top:12px;color:var(--mute);font-size:clamp(12px,.8vw,14px)}
+#getApp .ga-btn{display:inline-flex;align-items:center;justify-content:center;margin:clamp(14px,2.2vh,24px) 0 clamp(26px,4vh,40px);padding:16px 28px;background:#2d2d2b;color:#e6ff8a;font:500 20px/1.3 var(--sans);text-decoration:none;transition:background .2s,color .2s}
+#getApp .ga-btn:hover{background:var(--lime);color:#141414}
+#end #totop{display:none}
 @media (max-width:860px){#getApp .ga{grid-template-columns:1fr}}
 </style>
 </head>
@@ -1222,6 +1226,7 @@ body,body *{word-break:keep-all;overflow-wrap:break-word}
     <div class="ga-text">
       <span class="ga-tag">TRY THE APP</span>
       <h2>F,LOG 앱을<br><em>직접 써 보세요</em></h2>
+      <a class="ga-btn" href="#intro" id="gaDone">다 보신 후 꼭 눌러주세요 →</a>
       <p class="ga-desc">휴대폰 카메라로 QR을 찍고, 홈 화면에 추가하면 앱처럼 열립니다.</p>
       <div class="ga-qr">
         <div class="ga-code" role="img" aria-label="F,LOG 앱 QR 코드"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 29 29" shape-rendering="crispEdges" class="segno"><path class="qrline" stroke="#151515" d="M0 0.5h7m3 0h1m1 0h1m1 0h1m1 0h1m1 0h1m3 0h7m-29 1h1m5 0h1m1 0h1m5 0h1m1 0h1m1 0h1m1 0h1m1 0h1m5 0h1m-29 1h1m1 0h3m1 0h1m1 0h2m1 0h2m1 0h2m3 0h2m1 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m1 0h3m2 0h1m2 0h2m2 0h1m1 0h1m1 0h3m1 0h1m-29 1h1m1 0h3m1 0h1m2 0h1m1 0h2m3 0h1m2 0h2m1 0h1m1 0h3m1 0h1m-29 1h1m5 0h1m2 0h1m1 0h1m4 0h1m5 0h1m5 0h1m-29 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-21 1h1m5 0h1m1 0h1m1 0h3m-21 1h1m5 0h1m1 0h3m2 0h2m2 0h1m1 0h1m1 0h2m2 0h3m-28 1h1m4 0h1m1 0h1m2 0h1m1 0h1m2 0h1m1 0h5m1 0h2m1 0h2m-28 1h2m2 0h5m1 0h2m3 0h2m1 0h1m1 0h1m2 0h2m-25 1h2m3 0h1m1 0h2m2 0h2m3 0h1m1 0h1m2 0h1m3 0h1m-25 1h1m1 0h2m1 0h1m2 0h2m5 0h1m2 0h1m2 0h1m5 0h1m-29 1h1m7 0h2m2 0h1m1 0h3m2 0h1m2 0h3m2 0h2m-28 1h2m3 0h2m1 0h1m1 0h2m2 0h2m3 0h1m1 0h1m1 0h3m-27 1h1m1 0h1m1 0h2m1 0h1m2 0h1m1 0h1m1 0h2m10 0h1m1 0h1m-29 1h3m1 0h1m1 0h1m1 0h2m2 0h2m3 0h1m2 0h2m3 0h2m-27 1h2m5 0h7m1 0h2m1 0h2m1 0h4m1 0h3m-29 1h2m1 0h1m1 0h2m4 0h1m3 0h1m2 0h2m1 0h2m1 0h2m2 0h1m-29 1h1m8 0h3m2 0h2m2 0h2m2 0h3m-25 1h1m3 0h1m1 0h1m1 0h1m3 0h1m2 0h1m1 0h2m1 0h5m1 0h3m-21 1h1m1 0h1m1 0h1m1 0h1m2 0h4m3 0h2m-26 1h7m3 0h1m1 0h1m2 0h3m1 0h2m1 0h1m1 0h3m-27 1h1m5 0h1m3 0h3m2 0h2m1 0h1m1 0h1m3 0h1m2 0h1m-28 1h1m1 0h3m1 0h1m2 0h6m1 0h1m2 0h7m1 0h1m-28 1h1m1 0h3m1 0h1m2 0h1m2 0h2m1 0h1m1 0h2m4 0h1m1 0h2m1 0h1m-29 1h1m1 0h3m1 0h1m4 0h1m1 0h1m1 0h2m1 0h1m3 0h6m-28 1h1m5 0h1m2 0h1m3 0h3m3 0h1m2 0h2m1 0h2m1 0h1m-29 1h7m1 0h1m1 0h1m1 0h2m3 0h1m3 0h1m2 0h3"/></svg></div>
@@ -1240,6 +1245,8 @@ body,body *{word-break:keep-all;overflow-wrap:break-word}
   function go(){ var p=v.play(); if(p&&p.catch) p.catch(function(){}); }
   if('IntersectionObserver' in window) new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting) go(); else v.pause(); }); },{threshold:.2}).observe(v);
   else go();
+  var b=document.getElementById('gaDone'); // 처음(앱 소개 맨 위)으로
+  if(b) b.addEventListener('click',function(e){ var h=location.hash.slice(1); if(h==='making'||h==='brand') return; e.preventDefault(); scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'}); });
   addEventListener('hashchange',function(){ setTimeout(function(){ var r=v.getBoundingClientRect(); if(r.top<innerHeight&&r.bottom>0) go(); },60); });
 })();
 </script>
